@@ -2,6 +2,10 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+* {
+  font-family: var(--font-google-sans);
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -121,9 +125,11 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   html {
     @apply font-sans;
   }
