@@ -1,13 +1,5 @@
-import { Button } from "@/shared/ui/button";
-import { ArrowUpIcon } from "lucide-react";
+import HomePage from '@/features/home/pages/home-page';
 
 export default function Home() {
-  return (
-    <div className="flex flex-wrap items-center gap-2 md:flex-row">
-      <Button variant="outline">Button</Button>
-      <Button variant="outline" size="icon" aria-label="Submit">
-        <ArrowUpIcon />
-      </Button>
-    </div>
-  );
+	return <HomePage />;
 }

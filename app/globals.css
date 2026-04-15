@@ -3,7 +3,7 @@
 @import "shadcn/tailwind.css";
 
 * {
-  font-family: var(--font-google-sans);
+  font-family: "Be Vietnam Pro", sans-serif;
 }
 
 @custom-variant dark (&:is(.dark *));
