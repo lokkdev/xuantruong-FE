@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { cn } from '@/shared/lib/utils';
 
 interface MenuItem {
@@ -18,15 +21,15 @@ const menus: MenuItem[] = [
 	},
 	{
 		label: 'Dịch vụ',
-		href: '/contact',
+		href: '/services',
 	},
 	{
 		label: 'Tra cứu',
-		href: '/contact',
+		href: '/lookup',
 	},
 	{
 		label: 'Tin tức',
-		href: '/contact',
+		href: '/news',
 	},
 	{
 		label: 'Liên hệ',
@@ -35,7 +38,7 @@ const menus: MenuItem[] = [
 ];
 
 export function Header() {
-	const pathname = '/';
+	const pathname = usePathname();
 	return (
 		<header className="bg-[#d0ddef]">
 			<div className="mx-auto flex h-20 w-full max-w-[1280px] items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
@@ -52,7 +55,7 @@ export function Header() {
 				<nav className="hidden md:block">
 					<ul className="flex items-center gap-8">
 						{menus.map((menu) => (
-							<li key={menu.href} className="relative group">
+							<li key={`${menu.label}-${menu.href}`} className="relative group">
 								<Link
 									href={menu.href}
 									className={cn(
@@ -102,7 +105,7 @@ export function Header() {
 							</div>
 							<ul className="mt-3 flex flex-col gap-2">
 								{menus.map((menu) => (
-									<li key={menu.href}>
+									<li key={`${menu.label}-${menu.href}`}>
 										<Link
 											href={menu.href}
 											className={cn(

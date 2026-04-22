@@ -17,7 +17,13 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/shared/components/ui/select';
-import { ChevronDownIcon, SearchIcon } from 'lucide-react';
+import {
+	CalendarDaysIcon,
+	ChevronDownIcon,
+	MapPinIcon,
+	NavigationIcon,
+	SearchIcon,
+} from 'lucide-react';
 import { useState } from 'react';
 
 function formatTripDate(date: Date): string {
@@ -31,12 +37,15 @@ function formatTripDate(date: Date): string {
 export function TripSearchForm() {
 	const [date, setDate] = useState<Date | undefined>(undefined);
 	return (
-		<div className="flex flex-wrap md:flex-nowrap items-end justify-start gap-6">
-			<Field>
-				<FieldLabel>ĐIỂM ĐI</FieldLabel>
+		<div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-[1fr_1fr_1fr_auto] xl:items-end">
+			<Field className="w-full">
+				<FieldLabel className="flex items-center gap-2 text-xs font-semibold tracking-[0.6px] text-[#424654]">
+					<MapPinIcon className="size-3.5" />
+					ĐIỂM ĐI
+				</FieldLabel>
 				<Select>
 					<SelectTrigger size="lg" className="w-full bg-[#E0E3E6] px-4 py-3.5">
-						<SelectValue placeholder="Chọn địa điểm xuất phát" />
+						<SelectValue placeholder="Hà Nội" />
 					</SelectTrigger>
 					<SelectContent>
 						<SelectGroup>
@@ -50,11 +59,14 @@ export function TripSearchForm() {
 					</SelectContent>
 				</Select>
 			</Field>
-			<Field>
-				<FieldLabel>ĐIỂM ĐẾN</FieldLabel>
+			<Field className="w-full">
+				<FieldLabel className="flex items-center gap-2 text-xs font-semibold tracking-[0.6px] text-[#424654]">
+					<NavigationIcon className="size-3.5" />
+					ĐIỂM ĐẾN
+				</FieldLabel>
 				<Select>
 					<SelectTrigger size="lg" className="w-full bg-[#E0E3E6] px-4 py-3.5">
-						<SelectValue placeholder="Chọn địa điểm đến" />
+						<SelectValue placeholder="Hạ Long" />
 					</SelectTrigger>
 					<SelectContent>
 						<SelectGroup>
@@ -68,8 +80,11 @@ export function TripSearchForm() {
 					</SelectContent>
 				</Select>
 			</Field>
-			<Field>
-				<FieldLabel>NGÀY ĐI</FieldLabel>
+			<Field className="w-full">
+				<FieldLabel className="flex items-center gap-2 text-xs font-semibold tracking-[0.6px] text-[#424654]">
+					<CalendarDaysIcon className="size-3.5" />
+					NGÀY ĐI
+				</FieldLabel>
 				<Popover>
 					<PopoverTrigger
 						data-empty={!date}
@@ -77,11 +92,11 @@ export function TripSearchForm() {
 							buttonVariants({
 								variant: 'outline',
 								className:
-									'w-full h-12 flex px-4 py-3.5 bg-[#E0E3E6] rounded-md justify-between',
+									'h-12 w-full justify-between rounded-md bg-[#E0E3E6] px-4 py-3.5',
 							}),
-							'w-full h-12 flex px-4 py-3.5 bg-[#E0E3E6] rounded-md justify-between',
+							'h-12 w-full justify-between rounded-md bg-[#E0E3E6] px-4 py-3.5 text-left',
 						)}>
-						{date ? formatTripDate(date) : <span>Chọn ngày</span>}
+						{date ? formatTripDate(date) : <span>mm/dd/yyyy</span>}
 						<ChevronDownIcon className="size-4 opacity-60" />
 					</PopoverTrigger>
 					<PopoverContent className="w-auto p-0" align="start">
@@ -94,10 +109,8 @@ export function TripSearchForm() {
 					</PopoverContent>
 				</Popover>
 			</Field>
-			<Button
-				size="lg"
-				className="flex h-12 items-center gap-2 bg-[#8B5000] px-9 py-2 w-full md:w-auto">
-				<SearchIcon />
+			<Button size="lg" className="h-12 w-full bg-[#8B5000] px-6 md:col-span-2 xl:col-span-1 xl:w-auto xl:px-9">
+				<SearchIcon data-icon="inline-start" />
 				<span className="text-base text-white">TÌM CHUYẾN XE</span>
 			</Button>
 		</div>

@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+.figma-assets/
 
 # debug
 npm-debug.log*
