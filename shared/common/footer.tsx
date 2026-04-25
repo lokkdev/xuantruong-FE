@@ -35,8 +35,8 @@ const companyLinks = [
 export function Footer() {
 	return (
 		<footer className="border-t border-[#C3C6D626] bg-[#F2F4F7] pb-16 pt-[65px] 2xl:pb-20">
-			<div className="mx-auto flex w-full max-w-[1280px] flex-col gap-12 px-4 md:px-8 2xl:max-w-[1600px] 2xl:gap-14 2xl:px-12">
-				<div className="grid gap-12 md:grid-cols-2 xl:grid-cols-6">
+			<div className="flex w-full flex-col gap-12 px-4 md:px-8 2xl:gap-14 2xl:px-12">
+				<div className="grid gap-12 md:grid-cols-2 xl:grid-cols-[repeat(5,minmax(0,1fr))_300px]">
 					<div className="flex flex-col gap-4">
 						<Image
 							src="/images/home/logo-xuan-truong2-Photoroom.png"
@@ -58,9 +58,9 @@ export function Footer() {
 						<Image
 							src="/images/figma/2d3344b09ef77c3a7588437871276b0b204b1142.png"
 							alt="Đã thông báo Bộ Công Thương"
-							width={106}
-							height={40}
-							className="h-[2.5rem] w-[6.5975rem] aspect-[105.56/40] object-contain"
+							width={250}
+							height={101}
+							className="w-[15.625rem] h-[6.3125rem] aspect-[250/101] object-contain"
 						/>
 					</div>
 
@@ -134,18 +134,17 @@ export function Footer() {
 						<h3 className="text-[14px] font-bold uppercase leading-5 tracking-[0.7px] text-[#191C1E] 2xl:text-[16px]">
 							Theo dõi chúng tôi
 						</h3>
-						<p className="max-w-[160px] text-[12px] leading-[19.5px] text-[#424654] 2xl:max-w-[220px] 2xl:text-[14px] 2xl:leading-6">
-							Theo dõi trang Facebook của nhà xe XUÂN TRƯỜNG LIMOUSINE để nhận
-							khuyến mãi và tin tức mới nhất.
-						</p>
-						<Link
-							href="/"
-							className="inline-flex w-fit items-center gap-2 text-[12px] font-semibold leading-4 text-[#0040A1] 2xl:text-[14px] 2xl:leading-5">
-							<span className="inline-flex size-6 items-center justify-center bg-[#0040A1] text-white">
-								f
-							</span>
-							Facebook
-						</Link>
+						<div className="w-full max-w-[300px] overflow-hidden rounded-sm">
+							<iframe
+								title="Facebook Xuân Trường Limousine"
+								src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fxekhachxuantruong%2F&tabs=timeline&width=300&height=450&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+								width="300"
+								height="450"
+								allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+								loading="lazy"
+								className="border-0"
+							/>
+						</div>
 					</div>
 				</div>
 
