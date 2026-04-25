@@ -26,6 +26,9 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
+const departureOptions = ['Hà Nội', 'Ninh Bình', 'Nam Định', 'Hải Phòng'] as const;
+const destinationOptions = ['Hạ Long', 'Cẩm Phả', 'Móng Cái', 'Vân Đồn'] as const;
+
 function formatTripDate(date: Date): string {
 	return date.toLocaleDateString('vi-VN', {
 		day: '2-digit',
@@ -43,18 +46,24 @@ export function TripSearchForm() {
 					<MapPinIcon className="size-3.5" />
 					ĐIỂM ĐI
 				</FieldLabel>
-				<Select>
+				<Select defaultValue={departureOptions[0]}>
 					<SelectTrigger size="lg" className="w-full bg-[#E0E3E6] px-4 py-3.5">
-						<SelectValue placeholder="Hà Nội" />
+						<SelectValue placeholder="Chọn điểm đi" />
 					</SelectTrigger>
-					<SelectContent>
+					<SelectContent
+						align="start"
+						alignItemWithTrigger={false}
+						className="rounded-[8px] border border-[#C3C6D6] bg-white p-1 shadow-[0px_8px_24px_rgba(0,0,0,0.08)]">
 						<SelectGroup>
-							<SelectLabel>Fruits</SelectLabel>
-							<SelectItem value="apple">Apple</SelectItem>
-							<SelectItem value="banana">Banana</SelectItem>
-							<SelectItem value="blueberry">Blueberry</SelectItem>
-							<SelectItem value="grapes">Grapes</SelectItem>
-							<SelectItem value="pineapple">Pineapple</SelectItem>
+							<SelectLabel>Điểm đi</SelectLabel>
+							{departureOptions.map((option) => (
+								<SelectItem
+									key={option}
+									value={option}
+									className="min-h-10 rounded-md px-3 text-sm text-[#191C1E] focus:bg-[#EAF0FF] focus:text-[#0040A1]">
+									{option}
+								</SelectItem>
+							))}
 						</SelectGroup>
 					</SelectContent>
 				</Select>
@@ -64,18 +73,24 @@ export function TripSearchForm() {
 					<NavigationIcon className="size-3.5" />
 					ĐIỂM ĐẾN
 				</FieldLabel>
-				<Select>
+				<Select defaultValue={destinationOptions[0]}>
 					<SelectTrigger size="lg" className="w-full bg-[#E0E3E6] px-4 py-3.5">
-						<SelectValue placeholder="Hạ Long" />
+						<SelectValue placeholder="Chọn điểm đến" />
 					</SelectTrigger>
-					<SelectContent>
+					<SelectContent
+						align="start"
+						alignItemWithTrigger={false}
+						className="rounded-[8px] border border-[#C3C6D6] bg-white p-1 shadow-[0px_8px_24px_rgba(0,0,0,0.08)]">
 						<SelectGroup>
-							<SelectLabel>Fruits</SelectLabel>
-							<SelectItem value="apple">Apple</SelectItem>
-							<SelectItem value="banana">Banana</SelectItem>
-							<SelectItem value="blueberry">Blueberry</SelectItem>
-							<SelectItem value="grapes">Grapes</SelectItem>
-							<SelectItem value="pineapple">Pineapple</SelectItem>
+							<SelectLabel>Điểm đến</SelectLabel>
+							{destinationOptions.map((option) => (
+								<SelectItem
+									key={option}
+									value={option}
+									className="min-h-10 rounded-md px-3 text-sm text-[#191C1E] focus:bg-[#EAF0FF] focus:text-[#0040A1]">
+									{option}
+								</SelectItem>
+							))}
 						</SelectGroup>
 					</SelectContent>
 				</Select>

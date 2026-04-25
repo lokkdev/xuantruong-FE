@@ -44,11 +44,11 @@ export function Header() {
 			<div className="mx-auto flex h-20 w-full max-w-[1280px] items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
 				<Link href="/" title="Home" className="flex h-full items-center">
 					<Image
-						src="/logo.svg"
-						alt="Logo"
-						width={120}
+						src="/images/home/logo-xuan-truong2-Photoroom.png"
+						alt="Xuân Trường"
+						width={74}
 						height={48}
-						className="h-10 w-auto object-contain sm:h-11"
+						className="w-[7.5rem] h-auto aspect-[73.58/48] object-contain"
 						priority
 					/>
 				</Link>

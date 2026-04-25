@@ -39,11 +39,11 @@ export function Footer() {
 				<div className="grid gap-12 md:grid-cols-2 xl:grid-cols-6">
 					<div className="flex flex-col gap-4">
 						<Image
-							src="/logo.svg"
+							src="/images/home/logo-xuan-truong2-Photoroom.png"
 							alt="Xuân Trường"
-							width={98}
-							height={64}
-							className="h-16 w-auto"
+							width={512}
+							height={512}
+							className="w-[9.9rem] h-[6.45rem] max-w-[512px] max-h-[512px] aspect-[98.09/64] object-contain"
 						/>
 						<div className="flex flex-col gap-2 text-[#191C1E]">
 							<p className="max-w-[147px] text-[12px] font-semibold uppercase leading-4 2xl:max-w-[190px] 2xl:text-[14px] 2xl:leading-5">
@@ -60,7 +60,7 @@ export function Footer() {
 							alt="Đã thông báo Bộ Công Thương"
 							width={106}
 							height={40}
-							className="h-10 w-auto"
+							className="h-[2.5rem] w-[6.5975rem] aspect-[105.56/40] object-contain"
 						/>
 					</div>
 

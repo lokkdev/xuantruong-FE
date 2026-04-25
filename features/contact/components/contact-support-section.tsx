@@ -32,6 +32,12 @@ const supportCards = [
 	},
 ];
 
+const serviceOptions = [
+	'Đặt vé & Chuyến đi',
+	'Dịch vụ gửi hàng hóa',
+	'Hỗ trợ khách hàng',
+] as const;
+
 export function ContactSupportSection() {
 	return (
 		<section className="px-4 pb-12 pt-8 md:px-6 md:pb-16 lg:px-8">
@@ -128,15 +134,25 @@ export function ContactSupportSection() {
 								<FieldLabel className="text-xs font-semibold uppercase tracking-[0.6px] text-[#424654]">
 									Loại dịch vụ phản ánh
 								</FieldLabel>
-								<Select defaultValue="booking">
-									<SelectTrigger className="h-12 w-full rounded-[6px] border-0 bg-[#E0E3E6] px-4 text-base text-[#424654]">
+								<Select defaultValue={serviceOptions[0]}>
+									<SelectTrigger
+										size="lg"
+										className="h-12 w-full rounded-[6px] border-0 bg-[#E0E3E6] px-4 text-base text-[#191C1E] shadow-none ring-0">
 										<SelectValue placeholder="Chọn loại dịch vụ" />
 									</SelectTrigger>
-									<SelectContent>
+									<SelectContent
+										align="start"
+										alignItemWithTrigger={false}
+										className="rounded-[8px] border border-[#C3C6D6] bg-white p-1 shadow-[0px_8px_24px_rgba(0,0,0,0.08)]">
 										<SelectGroup>
-											<SelectItem value="booking">Đặt vé & Chuyến đi</SelectItem>
-											<SelectItem value="cargo">Dịch vụ gửi hàng hóa</SelectItem>
-											<SelectItem value="support">Hỗ trợ khách hàng</SelectItem>
+											{serviceOptions.map((option) => (
+												<SelectItem
+													key={option}
+													value={option}
+													className="min-h-10 rounded-md px-3 text-sm text-[#191C1E] focus:bg-[#EAF0FF] focus:text-[#0040A1]">
+													{option}
+												</SelectItem>
+											))}
 										</SelectGroup>
 									</SelectContent>
 								</Select>
