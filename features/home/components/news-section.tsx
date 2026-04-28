@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 interface NewsItem {
 	id: string;
 	title: string;
@@ -49,12 +51,13 @@ export function NewsSection({ items = defaultNewsItems }: NewsSectionProps) {
 				<div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
 					{items.map((item) => (
 						<article key={item.id} className="flex flex-col gap-4">
-							<div className="overflow-hidden rounded-lg bg-[#E6E8EB]">
-								<img
+							<div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-[#E6E8EB]">
+								<Image
 									src={item.image}
 									alt={item.imageAlt}
-									className="aspect-[16/10] w-full object-cover"
-									loading="lazy"
+									fill
+									className="object-cover"
+									sizes="(min-width: 1280px) 296px, (min-width: 640px) 50vw, 100vw"
 								/>
 							</div>
 							<h3 className="text-base font-bold leading-6 text-[#191C1E]">{item.title}</h3>

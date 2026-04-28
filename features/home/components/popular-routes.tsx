@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Button } from '@/shared/components/ui/button';
 import { API_BASE_URL } from '@/shared/config/api';
 import { ArrowRightIcon, Clock3Icon, MapPinIcon } from 'lucide-react';
@@ -204,10 +205,12 @@ export async function PopularRoutes() {
 							key={`${route.from}-${route.to}`}
 							className="flex h-full flex-col overflow-hidden rounded-[8px] border border-[rgba(195,198,214,0.1)] bg-white shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]">
 							<div className="relative h-48 w-full">
-								<img
+								<Image
 									src={route.imageUrl}
 									alt={`${route.from} đến ${route.to}`}
-									className="h-full w-full object-cover"
+									fill
+									className="object-cover"
+									sizes="(min-width: 1280px) 304px, (min-width: 768px) 50vw, 100vw"
 								/>
 								{route.hot ? (
 									<span className="absolute right-4 top-4 rounded-xl bg-[#8B5000] px-3 py-1.5 text-xs font-semibold text-white">

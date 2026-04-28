@@ -2,10 +2,6 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-* {
-  font-family: "Be Vietnam Pro", sans-serif;
-}
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

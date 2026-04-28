@@ -1,11 +1,21 @@
 import Link from 'next/link';
 import { Ticket } from 'lucide-react';
+import type { AboutBannerData } from '../lib/about-banners';
 
-export function AboutCtaSection() {
+interface AboutCtaSectionProps {
+	banner: AboutBannerData;
+}
+
+export function AboutCtaSection({ banner }: AboutCtaSectionProps) {
 	return (
 		<section className="bg-[#F2F4F7] pb-24">
 			<div className="mx-auto w-full max-w-[1280px] px-4 md:px-8">
-				<div className="relative overflow-hidden rounded-[16px] bg-[#0056D2] px-4 py-10 md:px-12 md:py-12">
+				<div
+					className="relative overflow-hidden rounded-[16px] bg-[#0056D2] bg-cover bg-center px-4 py-10 md:px-12 md:py-12"
+					aria-label={banner.alt}
+					style={{
+						backgroundImage: `linear-gradient(0deg, rgba(0, 86, 210, 0.88), rgba(0, 86, 210, 0.88)), url('${banner.src}')`,
+					}}>
 					<div className="pointer-events-none absolute -right-32 -top-32 size-64 rounded-[12px] bg-white/5" />
 
 					<div className="relative flex flex-col items-center gap-6">

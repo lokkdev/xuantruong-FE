@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Accessibility, Clock3, Ticket } from 'lucide-react';
+import type { AboutBannerData } from '../lib/about-banners';
 
 type ServiceFeatureIconKey = 'clock' | 'accessibility';
 
@@ -21,6 +22,13 @@ export interface FleetShowcaseData {
 		bottomLeft: string;
 		bottomRight: string;
 	};
+}
+
+interface FleetShowcaseSectionProps {
+	data?: FleetShowcaseData;
+	mainBanner: AboutBannerData;
+	sideBanner: AboutBannerData;
+	highlightBanner: AboutBannerData;
 }
 
 const iconMap = {
@@ -56,9 +64,10 @@ export const defaultFleetShowcaseData: FleetShowcaseData = {
 
 export function FleetShowcaseSection({
 	data = defaultFleetShowcaseData,
-}: {
-	data?: FleetShowcaseData;
-}) {
+	mainBanner,
+	sideBanner,
+	highlightBanner,
+}: FleetShowcaseSectionProps) {
 	return (
 		<section className="bg-[#F2F4F7] py-24">
 			<div className="mx-auto flex w-full max-w-[1280px] flex-col gap-12 px-4 md:px-8 xl:flex-row xl:items-center xl:gap-12">
@@ -103,8 +112,8 @@ export function FleetShowcaseSection({
 					<div className="grid gap-4 md:grid-cols-2">
 						<div className="relative h-[256px] overflow-hidden rounded-2xl">
 							<Image
-								src={data.gallery.topLeft}
-								alt="Nội thất xe limousine cao cấp"
+								src={mainBanner.src}
+								alt={mainBanner.alt}
 								fill
 								className="object-cover"
 								sizes="(min-width: 1280px) 284px, 100vw"
@@ -112,8 +121,8 @@ export function FleetShowcaseSection({
 						</div>
 						<div className="relative h-[288px] overflow-hidden rounded-2xl md:-mt-8">
 							<Image
-								src={data.gallery.topRight}
-								alt="Tài xế chuyên nghiệp"
+								src={highlightBanner.src}
+								alt={highlightBanner.alt}
 								fill
 								className="object-cover"
 								sizes="(min-width: 1280px) 284px, 100vw"
@@ -130,8 +139,8 @@ export function FleetShowcaseSection({
 						</div>
 						<div className="relative h-[96px] overflow-hidden rounded-2xl md:-mt-24 md:h-[192px]">
 							<Image
-								src={data.gallery.bottomRight}
-								alt="Xe chạy trên cung đường"
+								src={sideBanner.src}
+								alt={sideBanner.alt}
 								fill
 								className="object-cover"
 								sizes="(min-width: 1280px) 284px, 100vw"

@@ -6,16 +6,27 @@ import { BrandValuesSection } from '../components/brand-values-section';
 import { FleetShowcaseSection } from '../components/fleet-showcase-section';
 import { OfficeNetworkSection } from '../components/office-network-section';
 import { AboutCtaSection } from '../components/about-cta-section';
+import type { AppLocale } from '@/shared/i18n/types';
+import { getAboutBannersByOrder } from '../lib/about-banners';
 
-function AboutPage() {
+async function AboutPage({ locale }: { locale: AppLocale }) {
+	const banners = await getAboutBannersByOrder();
+
 	return (
 		<main>
-			<Header />
-			<AboutMeBanner />
+			<Header locale={locale} />
+			<AboutMeBanner banner={banners[1]} />
 			<BrandValuesSection />
-			<FleetShowcaseSection />
-			<OfficeNetworkSection />
-			<AboutCtaSection />
+			<FleetShowcaseSection
+				mainBanner={banners[2]}
+				sideBanner={banners[3]}
+				highlightBanner={banners[6]}
+			/>
+			<OfficeNetworkSection
+				hanoiBanner={banners[4]}
+				quangNinhBanner={banners[5]}
+			/>
+			<AboutCtaSection banner={banners[7]} />
 			<Footer />
 		</main>
 	);
