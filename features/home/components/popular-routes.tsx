@@ -137,6 +137,14 @@ function resolveRouteImageUrl(route: PopularRouteApiItem, fallbackUrl: string): 
 		return fallbackUrl;
 	}
 
+	const normalizedImage = apiImage.toLowerCase();
+	if (
+		normalizedImage.includes('/placeholders/') ||
+		normalizedImage.includes('popular-route-thumb.svg')
+	) {
+		return fallbackUrl;
+	}
+
 	if (/^https?:\/\//i.test(apiImage)) {
 		return apiImage;
 	}
