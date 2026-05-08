@@ -58,30 +58,38 @@ function buildNewsQuery(page: number, categorySlug?: string): string {
 }
 
 async function getNews(page: number, categorySlug?: string): Promise<NewsPaginationData> {
-	const response = await fetch(
-		`${API_BASE_URL}${NEWS_API_ROUTE}?${buildNewsQuery(page, categorySlug)}`,
-		{ cache: 'no-store' },
-	);
+	try {
+		const response = await fetch(
+			`${API_BASE_URL}${NEWS_API_ROUTE}?${buildNewsQuery(page, categorySlug)}`,
+			{ cache: 'no-store' },
+		);
 
-	if (!response.ok) {
-		throw new Error(`News API failed with status ${response.status}`);
+		if (!response.ok) {
+			return { data: [], per_page: DEFAULT_PER_PAGE, page: 1, total: 0 };
+		}
+
+		const payload = (await response.json()) as ApiEnvelope<NewsPaginationData>;
+		return payload.data;
+	} catch {
+		return { data: [], per_page: DEFAULT_PER_PAGE, page: 1, total: 0 };
 	}
-
-	const payload = (await response.json()) as ApiEnvelope<NewsPaginationData>;
-	return payload.data;
 }
 
 async function getNewsCategories(): Promise<NewsCategoryApiItem[]> {
-	const response = await fetch(`${API_BASE_URL}${NEWS_CATEGORIES_API_ROUTE}`, {
-		cache: 'no-store',
-	});
+	try {
+		const response = await fetch(`${API_BASE_URL}${NEWS_CATEGORIES_API_ROUTE}`, {
+			cache: 'no-store',
+		});
 
-	if (!response.ok) {
-		throw new Error(`News categories API failed with status ${response.status}`);
+		if (!response.ok) {
+			return [];
+		}
+
+		const payload = (await response.json()) as ApiEnvelope<NewsCategoryApiItem[]>;
+		return payload.data;
+	} catch {
+		return [];
 	}
-
-	const payload = (await response.json()) as ApiEnvelope<NewsCategoryApiItem[]>;
-	return payload.data;
 }
 
 export default async function Page({
