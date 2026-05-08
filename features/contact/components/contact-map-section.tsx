@@ -1,10 +1,50 @@
-import Image from 'next/image';
+'use client';
+
+import { useState } from 'react';
 import { MapPinIcon } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
 
-const offices = ['Hà Nội', 'Nam Định', 'Ninh Bình'];
+type Office = {
+	city: string;
+	name: string;
+	address: string;
+	directionsUrl: string;
+	mapSrc: string;
+};
+
+const offices: Office[] = [
+	{
+		city: 'Hà Nội',
+		name: 'Xuân Trường Office - Hà Nội',
+		address: '33 Lê Trọng Tấn, La Khê, Hà Đông, Hà Nội',
+		directionsUrl:
+			'https://www.google.com/maps/dir/?api=1&destination=33+L%C3%AA+Tr%E1%BB%8Dng+T%E1%BA%A5n%2C+La+Kh%C3%AA%2C+H%C3%A0+%C4%90%C3%B4ng%2C+H%C3%A0+N%E1%BB%99i',
+		mapSrc:
+			'https://www.google.com/maps?output=embed&z=10&hl=vi&ll=20.98379330799173,105.80370942920485',
+	},
+	{
+		city: 'Nam Định',
+		name: 'Xuân Trường Office - Nam Định',
+		address: 'Xuân Trường, Nam Định',
+		directionsUrl:
+			'https://www.google.com/maps/dir/?api=1&destination=Xu%C3%A2n+Tr%C6%B0%E1%BB%9Dng%2C+Nam+%C4%90%E1%BB%8Bnh',
+		mapSrc:
+			'https://www.google.com/maps?output=embed&z=12&hl=vi&q=Xu%C3%A2n+Tr%C6%B0%E1%BB%9Dng%2C+Nam+%C4%90%E1%BB%8Bnh',
+	},
+	{
+		city: 'Ninh Bình',
+		name: 'Xuân Trường Office - Ninh Bình',
+		address: 'Ninh Bình',
+		directionsUrl:
+			'https://www.google.com/maps/dir/?api=1&destination=Ninh+B%C3%ACnh',
+		mapSrc:
+			'https://www.google.com/maps?output=embed&z=12&hl=vi&q=Ninh+B%C3%ACnh',
+	},
+];
 
 export function ContactMapSection() {
+	const [selectedOffice, setSelectedOffice] = useState(offices[0]);
+
 	return (
 		<section className="px-4 pb-0 md:px-8 md:pb-0">
 			<div className="mx-auto w-full max-w-[1280px] overflow-hidden rounded-2xl bg-white pt-4 shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)]">
@@ -16,31 +56,33 @@ export function ContactMapSection() {
 						</p>
 					</div>
 					<div className="flex items-start gap-2">
-						{offices.map((city, index) => (
+						{offices.map((office) => (
 							<Button
-								key={city}
+								key={office.city}
 								variant="ghost"
 								size="sm"
+								onClick={() => setSelectedOffice(office)}
 								className={
-									index === 0
+									selectedOffice.city === office.city
 										? 'h-9 rounded-xl bg-[#0040A1] px-4 text-sm font-medium text-white hover:bg-[#003486] hover:text-white'
 										: 'h-9 rounded-xl bg-[#E6E8EB] px-4 text-sm font-medium text-[#424654] hover:bg-[#DCE0E6] hover:text-[#424654]'
 								}>
-								{city}
+								{office.city}
 							</Button>
 						))}
 					</div>
 				</div>
 
 				<div className="relative h-[320px] md:h-[450px]">
-					<Image
-						src="/images/figma/6443d9ff6d9887f0b178c9c927ed04557317114d.png"
-						alt="Bản đồ văn phòng"
-						fill
-						className="object-cover opacity-60"
-						sizes="(min-width: 1280px) 1232px, 100vw"
+					<iframe
+						title={`Bản đồ ${selectedOffice.city}`}
+						src={selectedOffice.mapSrc}
+						className="absolute inset-0 h-full w-full border-0"
+						loading="lazy"
+						referrerPolicy="no-referrer-when-downgrade"
+						allowFullScreen
 					/>
-					<div className="absolute inset-0 bg-white/25" />
+					<div className="absolute inset-0 bg-white/15" />
 					<div className="absolute inset-0 flex items-center justify-center px-4">
 						<div className="flex max-w-[384px] gap-4 rounded-lg bg-white p-6 shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)]">
 							<div className="flex size-9 items-center justify-center rounded-md bg-[#EAF0FF]">
@@ -48,16 +90,18 @@ export function ContactMapSection() {
 							</div>
 							<div>
 								<p className="text-base font-semibold leading-6 text-[#0040A1]">
-									Xuân Trường Office - Hà Nội
+									{selectedOffice.name}
 								</p>
 								<p className="text-xs leading-4 text-[#424654]">
-									123 Giải Phóng, Hai Bà Trưng
+									{selectedOffice.address}
 								</p>
-								<button
-									type="button"
-									className="mt-2 text-xs font-semibold uppercase tracking-[0.6px] text-[#8B5000]">
+								<a
+									href={selectedOffice.directionsUrl}
+									target="_blank"
+									rel="noreferrer"
+									className="mt-2 inline-block text-xs font-semibold uppercase tracking-[0.6px] text-[#8B5000]">
 									Chỉ đường
-								</button>
+								</a>
 							</div>
 						</div>
 					</div>

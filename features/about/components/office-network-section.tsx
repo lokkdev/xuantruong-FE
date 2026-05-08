@@ -1,22 +1,33 @@
 import Image from 'next/image';
 import { MapPin, Phone } from 'lucide-react';
+import type { AboutBannerData } from '../lib/about-banners';
 
-const offices = [
-	{
-		name: 'Văn Phòng Hà Nội',
-		address: 'Số 102 Giải Phóng, Phương Mai, Đống Đa, Hà Nội',
-		hotline: '1900 636 765',
-		image: '/images/about/b5ea23e6eb5919b39b9bf48edb2d85f783885b46.png',
-	},
-	{
-		name: 'Văn Phòng Quảng Ninh',
-		address: 'Số 55 Lê Thánh Tông, Hồng Gai, Hạ Long, Quảng Ninh',
-		hotline: '0912 345 678',
-		image: '/images/about/5398cc7d775dc3e9701f785360aa217684a276b3.png',
-	},
-];
+interface OfficeNetworkSectionProps {
+	hanoiBanner: AboutBannerData;
+	quangNinhBanner: AboutBannerData;
+}
 
-export function OfficeNetworkSection() {
+export function OfficeNetworkSection({
+	hanoiBanner,
+	quangNinhBanner,
+}: OfficeNetworkSectionProps) {
+	const offices = [
+		{
+			name: 'Văn Phòng Hà Nội',
+			address: 'Số 102 Giải Phóng, Phương Mai, Đống Đa, Hà Nội',
+			hotline: '1900 636 765',
+			image: hanoiBanner.src,
+			alt: hanoiBanner.alt,
+		},
+		{
+			name: 'Văn Phòng Quảng Ninh',
+			address: 'Số 55 Lê Thánh Tông, Hồng Gai, Hạ Long, Quảng Ninh',
+			hotline: '0912 345 678',
+			image: quangNinhBanner.src,
+			alt: quangNinhBanner.alt,
+		},
+	];
+
 	return (
 		<section className="bg-[#F2F4F7] py-24">
 			<div className="mx-auto flex w-full max-w-[1280px] flex-col gap-16 px-4 md:px-8">
@@ -36,7 +47,7 @@ export function OfficeNetworkSection() {
 							<div className="relative h-[328.5px] overflow-hidden rounded-[8px]">
 								<Image
 									src={office.image}
-									alt={office.name}
+									alt={office.alt}
 									fill
 									className="object-cover"
 									sizes="(min-width: 1280px) 584px, 100vw"

@@ -4,40 +4,49 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/shared/lib/utils';
+import type { AppLocale } from '@/shared/i18n/types';
+import { t } from '@/shared/i18n/dict';
+import { LanguageSwitcher } from '@/shared/common/language-switcher';
 
 interface MenuItem {
-	label: string;
+	key:
+		| 'nav.home'
+		| 'nav.about'
+		| 'nav.services'
+		| 'nav.lookup'
+		| 'nav.news'
+		| 'nav.contact';
 	href: string;
 }
 
 const menus: MenuItem[] = [
 	{
-		label: 'Trang chủ',
+		key: 'nav.home',
 		href: '/',
 	},
 	{
-		label: 'Giới thiệu',
+		key: 'nav.about',
 		href: '/about',
 	},
 	{
-		label: 'Dịch vụ',
+		key: 'nav.services',
 		href: '/services',
 	},
 	{
-		label: 'Tra cứu',
+		key: 'nav.lookup',
 		href: '/lookup',
 	},
 	{
-		label: 'Tin tức',
+		key: 'nav.news',
 		href: '/news',
 	},
 	{
-		label: 'Liên hệ',
+		key: 'nav.contact',
 		href: '/contact',
 	},
 ];
 
-export function Header() {
+export function Header({ locale }: { locale: AppLocale }) {
 	const pathname = usePathname();
 	return (
 		<header className="bg-[#d0ddef]">
@@ -55,7 +64,7 @@ export function Header() {
 				<nav className="hidden md:block">
 					<ul className="flex items-center gap-8">
 						{menus.map((menu) => (
-							<li key={`${menu.label}-${menu.href}`} className="relative group">
+							<li key={`${menu.key}-${menu.href}`} className="relative group">
 								<Link
 									href={menu.href}
 									className={cn(
@@ -64,7 +73,7 @@ export function Header() {
 											'!text-[#0040A1]': pathname === menu.href,
 										},
 									)}>
-									{menu.label}
+									{t(locale, menu.key)}
 								</Link>
 								<span
 									className={cn(
@@ -78,11 +87,9 @@ export function Header() {
 					</ul>
 				</nav>
 				<div className="flex items-center gap-2">
-					<Link
-						href="/"
-						className="hidden uppercase text-sm font-bold text-[#0040A1] md:inline-flex">
-						VN/EN
-					</Link>
+					<div className="hidden md:inline-flex">
+						<LanguageSwitcher locale={locale} />
+					</div>
 					<details className="relative md:hidden">
 						<summary className="flex cursor-pointer list-none items-center justify-center rounded-md p-2 text-[#0040A1] hover:bg-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0040A1]/40">
 							<span className="sr-only">Open menu</span>
@@ -95,17 +102,13 @@ export function Header() {
 						<div className="absolute right-0 top-12 z-50 w-[min(85vw,340px)] rounded-lg bg-white p-4 shadow-lg ring-1 ring-black/5">
 							<div className="flex items-center justify-between">
 								<span className="text-sm font-semibold text-[#424654]">
-									Menu
+									{t(locale, 'common.menu')}
 								</span>
-								<Link
-									href="/"
-									className="uppercase text-sm font-bold text-[#0040A1]">
-									VN/EN
-								</Link>
+								<LanguageSwitcher locale={locale} />
 							</div>
 							<ul className="mt-3 flex flex-col gap-2">
 								{menus.map((menu) => (
-									<li key={`${menu.label}-${menu.href}`}>
+									<li key={`${menu.key}-${menu.href}`}>
 										<Link
 											href={menu.href}
 											className={cn(
@@ -115,7 +118,7 @@ export function Header() {
 														pathname === menu.href,
 												},
 											)}>
-											{menu.label}
+											{t(locale, menu.key)}
 										</Link>
 									</li>
 								))}
